@@ -3,20 +3,25 @@ string line = Console.ReadLine();
 if (!string.IsNullOrWhiteSpace(line))
 {
     line = line.Trim();
-    if (line.Contains("h"))
+    if (!line.Contains("h"))
     {
-        int first = line.IndexOf("h");
-        int last = line.LastIndexOf("h");
-        string line1 = line.Substring(0, first + 1);
-        string line2 = line.Substring(first + 1, last - 1);
-        string line3 = line.Substring(last);
-        line2 = line2.Replace("h", "H");
-        string lineChanged = line1 + line2 + line3;
-        Console.WriteLine(lineChanged);
+        Console.WriteLine("В строке нет символа h!");
     }
     else
     {
-        Console.WriteLine("В строке нет символа h!");
+        char[] newArray = line.ToCharArray();
+        int firstIndex = Array.IndexOf(newArray, 'h');
+        int lastIndex = Array.LastIndexOf(newArray, 'h');
+        for (int i = firstIndex + 1; i < lastIndex; i++)
+        {
+            if (newArray[i] == 'h')
+            {
+                newArray[i] = 'H';
+            }
+        }
+
+        string changedLine = new string(newArray);
+        Console.WriteLine(changedLine);
     }
 }
 else
